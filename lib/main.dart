@@ -32,15 +32,10 @@ class MyHomePage extends StatefulWidget {
 
 const double BLOCK_SIZE = 80;
 
-
-
 const int DIRECTION_UP = 0;
 const int DIRECTION_LEFT = 1;
 const int DIRECTION_RIGHT = 2;
 const int DIRECTION_DOWN = 3;
-
-
-
 
 class _MyHomePageState extends State<MyHomePage> {
   List<List<BlockUnit>> table;
@@ -84,7 +79,6 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,17 +88,16 @@ class _MyHomePageState extends State<MyHomePage> {
             buildMenu(),
             Expanded(
                 child: Center(
-                  child: Container(
-                      decoration: BoxDecoration(
-                          color: Color(0xffbaad9e),
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                              width: 6, color: Color(0xffbaad9e))),
-                      child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: buildTable())),
-                )),
+              child: Container(
+                  decoration: BoxDecoration(
+                      color: Color(0xffbaad9e),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(width: 6, color: Color(0xffbaad9e))),
+                  child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: buildTable())),
+            )),
             buildControlButton()
           ])),
     );
@@ -113,9 +106,8 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Row> buildTable() {
     List<Row> listRow = List();
     for (int row = 0; row < 4; row++) {
-      listRow.add(
-          Row(mainAxisSize: MainAxisSize.min,
-              children: buildRowBlockUnit(row)));
+      listRow.add(Row(
+          mainAxisSize: MainAxisSize.min, children: buildRowBlockUnit(row)));
     }
     return listRow;
   }
@@ -131,12 +123,12 @@ class _MyHomePageState extends State<MyHomePage> {
       margin: EdgeInsets.all(3),
       child: Center(
           child: Text(
-            "" + table[row][col].value.toString(),
-            style: TextStyle(
-                fontSize: table[row][col].fontSize,
-                fontWeight: FontWeight.bold,
-                color: table[row][col].colorText),
-          )),
+        "" + table[row][col].value.toString(),
+        style: TextStyle(
+            fontSize: table[row][col].fontSize,
+            fontWeight: FontWeight.bold,
+            color: table[row][col].colorText),
+      )),
     );
   }
 
@@ -153,34 +145,44 @@ class _MyHomePageState extends State<MyHomePage> {
       padding: EdgeInsets.only(top: 36, bottom: 12, left: 16, right: 16),
       color: Color(0xffede0c8),
       child:
-      Row(mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            GestureDetector(onTap: () {
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+        GestureDetector(
+            onTap: () {
               restart();
             },
-                child: Container(constraints: BoxConstraints(minWidth: 120),
-                    decoration: BoxDecoration(color: Color(0xff8f7a66),
-                        borderRadius: BorderRadius.circular(4)),
-                    padding: EdgeInsets.all(12),
-                    child: Column(children: <Widget>[
-                      Text("New Game", style: TextStyle(fontSize: 22,
+            child: Container(
+                constraints: BoxConstraints(minWidth: 120),
+                decoration: BoxDecoration(
+                    color: Color(0xff8f7a66),
+                    borderRadius: BorderRadius.circular(4)),
+                padding: EdgeInsets.all(12),
+                child: Column(children: <Widget>[
+                  Text("New Game",
+                      style: TextStyle(
+                          fontSize: 22,
                           fontWeight: FontWeight.bold,
                           color: Colors.white))
-                    ]))),
-            Expanded(child: Container()),
-            Container(constraints: BoxConstraints(minWidth: 120),
-                decoration: BoxDecoration(color: Color(0xffbbada0),
-                    borderRadius: BorderRadius.circular(4)),
-                padding: EdgeInsets.all(4),
-                child: Column(children: <Widget>[
-                  Text("SCORE", style: TextStyle(fontSize: 16,
+                ]))),
+        Expanded(child: Container()),
+        Container(
+            constraints: BoxConstraints(minWidth: 120),
+            decoration: BoxDecoration(
+                color: Color(0xffbbada0),
+                borderRadius: BorderRadius.circular(4)),
+            padding: EdgeInsets.all(4),
+            child: Column(children: <Widget>[
+              Text("SCORE",
+                  style: TextStyle(
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                       color: Colors.white)),
-                  Text("$score", style: TextStyle(fontSize: 26,
+              Text("$score",
+                  style: TextStyle(
+                      fontSize: 26,
                       fontWeight: FontWeight.bold,
                       color: Colors.white))
-                ]))
-          ]),
+            ]))
+      ]),
     );
   }
 
@@ -189,18 +191,17 @@ class _MyHomePageState extends State<MyHomePage> {
       padding: EdgeInsets.all(8),
       color: Color(0xffede0c8),
       child:
-      Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
         buildControlDirectionButton(Icons.keyboard_arrow_left, DIRECTION_LEFT),
         Container(
             child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                buildControlDirectionButton(
-                    Icons.keyboard_arrow_up, DIRECTION_UP),
-                buildControlDirectionButton(
-                    Icons.keyboard_arrow_down, DIRECTION_DOWN),
-              ],
-            )),
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            buildControlDirectionButton(Icons.keyboard_arrow_up, DIRECTION_UP),
+            buildControlDirectionButton(
+                Icons.keyboard_arrow_down, DIRECTION_DOWN),
+          ],
+        )),
         buildControlDirectionButton(
             Icons.keyboard_arrow_right, DIRECTION_RIGHT),
       ]),
@@ -222,7 +223,6 @@ class _MyHomePageState extends State<MyHomePage> {
             } else if (direction == DIRECTION_UP) {
               move = moveUp();
             }
-
 
             Future.delayed(const Duration(milliseconds: 200), () {
               if (move) {
@@ -247,19 +247,19 @@ class _MyHomePageState extends State<MyHomePage> {
               color: Colors.white,
               borderRadius: BorderRadius.only(
                   topLeft:
-                  direction == DIRECTION_UP || direction == DIRECTION_LEFT
-                      ? Radius.circular(8)
-                      : Radius.circular(0),
+                      direction == DIRECTION_UP || direction == DIRECTION_LEFT
+                          ? Radius.circular(8)
+                          : Radius.circular(0),
                   topRight:
-                  direction == DIRECTION_UP || direction == DIRECTION_RIGHT
-                      ? Radius.circular(8)
-                      : Radius.circular(0),
+                      direction == DIRECTION_UP || direction == DIRECTION_RIGHT
+                          ? Radius.circular(8)
+                          : Radius.circular(0),
                   bottomLeft:
-                  direction == DIRECTION_LEFT || direction == DIRECTION_DOWN
-                      ? Radius.circular(8)
-                      : Radius.circular(0),
+                      direction == DIRECTION_LEFT || direction == DIRECTION_DOWN
+                          ? Radius.circular(8)
+                          : Radius.circular(0),
                   bottomRight: direction == DIRECTION_RIGHT ||
-                      direction == DIRECTION_DOWN
+                          direction == DIRECTION_DOWN
                       ? Radius.circular(8)
                       : Radius.circular(0))),
           child: Icon(icon, size: 48),
@@ -609,25 +609,25 @@ class _MyHomePageState extends State<MyHomePage> {
         // return object of type Dialog
         return AlertDialog(
             content: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-              Text("Game Over ):",
-                  style: TextStyle(
-                      fontSize: 32,
-                      color: Colors.pink[800],
-                      fontWeight: FontWeight.bold)),
-              RaisedButton(
-                padding: EdgeInsets.symmetric(horizontal: 18, vertical: 6),
-                color: Color(0xff8f7a66),
-                child: Text("Play again",
-                    style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold)),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                  restart();
-                },
-              )
-            ]));
+          Text("Game Over ):",
+              style: TextStyle(
+                  fontSize: 32,
+                  color: Colors.pink[800],
+                  fontWeight: FontWeight.bold)),
+          RaisedButton(
+            padding: EdgeInsets.symmetric(horizontal: 18, vertical: 6),
+            color: Color(0xff8f7a66),
+            child: Text("Play again",
+                style: TextStyle(
+                    fontSize: 22,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold)),
+            onPressed: () {
+              Navigator.of(context).pop();
+              restart();
+            },
+          )
+        ]));
       },
     );
   }
